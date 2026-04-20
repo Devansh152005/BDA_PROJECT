@@ -3,7 +3,7 @@ Amazon Reviews Sentiment Analysis (Big Data + Deep Learning)
 Project Overview
 This project implements an end-to-end Big Data pipeline for sentiment analysis on the Amazon Reviews dataset using Hadoop HDFS for distributed storage, Apache Spark (PySpark) for preprocessing, and Deep Learning (TensorFlow/Keras) for classification.
 
-The system evolves from a TF-IDF based model to a context-aware LSTM model, enabling better understanding of phrases like “not good”.
+The system evolves from a TF-IDF based model to a context-aware LSTM model, enabling better understanding of phrases like “Not Good”.
 
 Architecture
 
