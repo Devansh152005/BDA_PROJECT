@@ -139,7 +139,7 @@ Importance of preprocessing at scale
 Handling class imbalance
 Integration of Big Data with Deep Learning
 
-Author
+Authors: <br>
 Kanhaiya Chhaparwal<br>
 Anuj Sule<br>
 Devansh Upadhyay<br>
