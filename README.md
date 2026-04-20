@@ -140,10 +140,10 @@ Handling class imbalance
 Integration of Big Data with Deep Learning
 
 Author
-Kanhaiya Chhaparwal
-Anuj sule
-Devansh Upadhyay
-Yuvraj srivastva
+Kanhaiya Chhaparwal<br>
+Anuj Sule<br>
+Devansh Upadhyay<br>
+Yuvraj Srivastva<br>
 
 Final Note
 This project demonstrates how Big Data systems and Deep Learning models can be combined to build scalable NLP applications.
