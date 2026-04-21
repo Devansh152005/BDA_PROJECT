@@ -124,14 +124,15 @@ Embedding → LSTM → Dense → Output
 
 ## 📁 Project Structure
 
-├── preprocessing.py
-├── dl_model.py
-├── lstm_model.py
-├── predict_lstm.py
-├── tokenizer.pkl
-├── sentiment_model.h5
-├── lstm_model.keras
-└── data/
+
+	├── preprocessing.py
+	├── dl_model.py
+	├── lstm_model.py
+	├── predict_lstm.py
+	├── tokenizer.pkl
+	├── sentiment_model.h5
+	├── lstm_model.keras
+	└── screenshot_*.png
 
 ---
 
