@@ -1,149 +1,185 @@
-Amazon Reviews Sentiment Analysis (Big Data + Deep Learning)
+Here is your clean, copy-paste ready README.md file exactly formatted for GitHub (no UI artifacts, no broken blocks):
 
-Project Overview
-This project implements an end-to-end Big Data pipeline for sentiment analysis on the Amazon Reviews dataset using Hadoop HDFS for distributed storage, Apache Spark (PySpark) for preprocessing, and Deep Learning (TensorFlow/Keras) for classification.
+⸻
 
-The system evolves from a TF-IDF based model to a context-aware LSTM model, enabling better understanding of phrases like “Not Good”.
 
-Architecture
+# 📊 Amazon Reviews Sentiment Analysis (Big Data + Deep Learning)
 
-Amazon Reviews Dataset
-→ HDFS Storage
-→ Spark Preprocessing (Cleaning + Labeling + Sampling)
-→ TF-IDF Features → ANN Model
-→ Raw Text → LSTM Model
-→ Evaluation & Prediction
+## 🚀 Project Overview
+This project implements an end-to-end Big Data pipeline for sentiment analysis on the Amazon Reviews dataset. It utilizes **Hadoop HDFS** for distributed storage, **Apache Spark (PySpark)** for large-scale preprocessing, and **Deep Learning (TensorFlow/Keras)** for classification.
 
-Technologies Used
+The system evolves from a frequency-based TF-IDF model to a context-aware **LSTM model**, enabling superior handling of complex linguistic patterns and negation (e.g., "Not Good").
 
-Hadoop (HDFS)
-Apache Spark (PySpark)
-TensorFlow / Keras
-Python (Pandas, NumPy, Scikit-learn)
-Linux (Ubuntu)
+---
 
-Dataset
+## 🏗️ Architecture
+![Architecture Diagram](Screenshot from 2026-04-20 10-10-27.png)
 
-Source: Amazon Reviews Dataset (HuggingFace)
-Format: Parquet (stored in HDFS)
-Fields used:
-text → Review content
-rating → Converted into sentiment label
+1. **Amazon Reviews Dataset**: Ingested from HuggingFace.  
+2. **HDFS Storage**: Distributed storage for raw and processed data.  
+3. **Spark Preprocessing**: Cleaning, labeling, and balanced sampling.  
+4. **Modeling**:  
+   - **ANN Path**: TF-IDF Features → Artificial Neural Network  
+   - **LSTM Path**: Tokenized Raw Text → Long Short-Term Memory Network  
+5. **Evaluation**: Metric analysis and real-world prediction  
 
-Data Processing Pipeline
+---
 
-Data Ingestion
-Load dataset from HDFS using Spark.
-Preprocessing
-Remove null values
-Convert text to lowercase
-Remove punctuation
-Tokenization and stopword removal
-Convert rating into sentiment:
-rating >= 3 → Positive (1)
-rating < 3 → Negative (0)
-Feature Engineering
+## ⚙️ Technologies Used
+- **Storage:** Hadoop (HDFS)  
+- **Processing:** Apache Spark (PySpark)  
+- **Deep Learning:** TensorFlow / Keras  
+- **Languages:** Python (Pandas, NumPy, Scikit-learn)  
+- **Environment:** Linux (Ubuntu)  
 
-TF-IDF Model:
+---
 
-HashingTF + IDF
-Used for ANN model
+## 📂 Dataset
+- **Source:** Amazon Reviews Dataset (HuggingFace)  
+- **Format:** Parquet (stored in HDFS)  
 
-LSTM Model:
+**Fields:**
+- `text` → Review content  
+- `rating` → Numerical score (converted into sentiment labels)  
 
-Uses raw cleaned text
-Converted into sequences
-Sampling Strategy
-Balanced sampling applied
-Prevents memory issues
-Reduces bias
+---
 
-Models Implemented
+## 🔄 Data Processing Pipeline
 
-TF-IDF + ANN
-Uses vectorized features
-Fast but no context understanding
-LSTM Model
+### 🔹 Preprocessing
+- Remove null values and punctuation  
+- Lowercase conversion & tokenization  
+- Stopword removal  
 
-Architecture:
+**Labeling:**
+- `Rating >= 3` → **Positive (1)**  
+- `Rating < 3` → **Negative (0)**  
+
+---
+
+### 🔹 Feature Engineering
+- **TF-IDF Model:** HashingTF + IDF vectorization  
+- **LSTM Model:** Text → sequences → padded inputs (length = 100)  
+
+![Preprocessing Logs](Screenshot_2.png)
+
+---
+
+## 🤖 Models Implemented
+
+### 1. TF-IDF + ANN
+- Uses vectorized frequency features  
+- **Pros:** Fast  
+- **Cons:** No context understanding  
+
+---
+
+### 2. LSTM Model
+
 Embedding → LSTM → Dense → Output
 
-Captures word order and context
-Handles phrases like “not good” correctly
+- Captures word order and dependencies  
+- Handles phrases like **"not worth the money"**
 
-Training Details
+![Model Summary](Screenshot_3.png)
 
-Dataset size: ~50,000 samples
-Sequence length: 100
-Vocabulary size: 10,000
-Epochs: 3–5
-Batch size: 64
-CPU-based training
+---
 
-Evaluation Metrics
+## 🏋️ Training Details
+- Dataset size: ~50,000 samples (balanced)  
+- Train/Test split: 80 / 20  
+- Vocabulary size: 10,000  
+- Sequence length: 100  
+- Epochs: 3–5  
+- Batch size: 64  
+- Training: CPU-based  
 
-Accuracy
-Precision
-Recall
-F1-score
-Confusion Matrix
+![Training Output](Screenshot_4.png)
 
-Example Predictions
+---
 
-Input: This product is amazing
-Output: Positive
+## 🖥️ Spark Cluster Configuration
+- 3 Worker Nodes  
+- 48 Total Cores  
+- ~43 GB RAM  
 
-Input: not good at all
-Output: Negative
+![Spark UI](Screenshot_6.png)
 
-Input: I regret buying this item
-Output: Negative
+---
 
-How to Run
+## 🧪 Results & Predictions
 
-Run Spark Preprocessing
+**Metrics Used:**
+- Accuracy  
+- Precision  
+- Recall  
+- F1-score  
 
-spark-submit --master spark://master:7077 --executor-memory 2G --total-executor-cores 8 preprocessing.py
+### Example Predictions
 
-Download Processed Data
+| Input | Prediction |
+|------|-----------|
+| This product stopped working after two days | Negative |
+| Not worth the money at all | Negative |
+| This product works exactly as described | Positive |
 
+![Predictions](Screenshot_5.png)
+
+---
+
+## 📁 Project Structure
+
+├── preprocessing.py
+├── dl_model.py
+├── lstm_model.py
+├── predict_lstm.py
+├── tokenizer.pkl
+├── sentiment_model.h5
+├── lstm_model.keras
+└── data/
+
+---
+
+## ▶️ How to Run
+
+### 1. Run Spark Preprocessing
+```bash
+spark-submit \
+--master spark://master:7077 \
+--executor-memory 3G \
+--total-executor-cores 12 \
+preprocessing.py
+```
+
+2. Download Processed Data
+```bash
 hdfs dfs -get /bda/lstm_data/* .
 cat part-* > lstm_data.csv
-
-Train LSTM Model
-
+```
+3. Train Model
+```bash
 source ~/dl_env/bin/activate
 python lstm_model.py
-
-Run Prediction
-
+```
+4. Run Prediction
+```bash
 python predict_lstm.py
+```
 
-Limitations
+⸻
 
-LSTM trained on sampled data only
-No distributed deep learning
-Limited handling of sarcasm and spelling errors
+🔮 Future Improvements
+	•	Use Transformer models (BERT / RoBERTa)
+	•	Deploy via FastAPI / Flask
+	•	Add real-time streaming pipeline
+	•	Improve spelling & sarcasm handling
 
-Future Improvements
+⸻
 
-Use BERT or Transformer models
-Add spell correction
-Deploy as API
-Integrate real-time streaming
+👨‍💻 Authors
+	•	Kanhaiya Chhaparwal
+	•	Anuj Sule
+	•	Devansh Upadhyay
+	•	Yuvraj Srivastva
 
-Key Learnings
-
-Difference between TF-IDF and LSTM
-Importance of preprocessing at scale
-Handling class imbalance
-Integration of Big Data with Deep Learning
-
-Authors: <br>
-Kanhaiya Chhaparwal<br>
-Anuj Sule<br>
-Devansh Upadhyay<br>
-Yuvraj Srivastva<br>
-
-Final Note
-This project demonstrates how Big Data systems and Deep Learning models can be combined to build scalable NLP applications.
+⸻
