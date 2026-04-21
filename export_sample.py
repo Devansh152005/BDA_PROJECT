@@ -11,7 +11,6 @@ sample_df = df.sample(fraction=0.01, seed=42)
 # Convert to Pandas
 pdf = sample_df.toPandas()
 
-# Save locally
 pdf.to_csv("train_sample.csv", index=False)
 
 print("✅ Sample exported to train_sample.csv")
