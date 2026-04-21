@@ -1,8 +1,3 @@
-Here is your clean, copy-paste ready README.md file exactly formatted for GitHub (no UI artifacts, no broken blocks):
-
-⸻
-
-
 # 📊 Amazon Reviews Sentiment Analysis (Big Data + Deep Learning)
 
 ## 🚀 Project Overview
@@ -12,8 +7,8 @@ The system evolves from a frequency-based TF-IDF model to a context-aware **LSTM
 
 ---
 
-## 🏗️ Architecture
-![Architecture Diagram](Screenshot from 2026-04-20 10-10-27.png)
+## 🏗️ Dataset
+![Architecture Diagram](Screenshot_1.png)
 
 1. **Amazon Reviews Dataset**: Ingested from HuggingFace.  
 2. **HDFS Storage**: Distributed storage for raw and processed data.  
@@ -34,7 +29,7 @@ The system evolves from a frequency-based TF-IDF model to a context-aware **LSTM
 
 ---
 
-## 📂 Dataset
+## 📂 Dataset Source
 - **Source:** Amazon Reviews Dataset (HuggingFace)  
 - **Format:** Parquet (stored in HDFS)  
 
@@ -81,7 +76,7 @@ Embedding → LSTM → Dense → Output
 - Captures word order and dependencies  
 - Handles phrases like **"not worth the money"**
 
-![Model Summary](Screenshot_3.png)
+
 
 ---
 
@@ -176,10 +171,10 @@ python predict_lstm.py
 
 ⸻
 
-👨‍💻 Authors
-	•	Kanhaiya Chhaparwal
-	•	Anuj Sule
-	•	Devansh Upadhyay
-	•	Yuvraj Srivastva
+👨‍💻 Authors 
 
-⸻
+	•	Kanhaiya Chhaparwal (U23AI103) 
+	•	Anuj Sule (U23AI078)
+	•	Devansh Upadhyay (U23AI104)
+	•	Yuvraj Srivastva (U23AI097)
+
