@@ -80,20 +80,27 @@ model = pipeline.fit(df)
 processed_df = model.transform(df)
 
 # -----------------------------------------
-# 9. Balanced Sampling (CRITICAL FIX 🔥)
+# 9. Balanced Sampling (FIXED ✅)
 # -----------------------------------------
-positive_df = processed_df.filter(col("label") == 1).sample(fraction=0.005, seed=42)
-negative_df = processed_df.filter(col("label") == 0).sample(fraction=0.005, seed=42)
+pos = processed_df.filter(col("label") == 1)
+neg = processed_df.filter(col("label") == 0)
 
-sample_df = positive_df.union(negative_df)
+pos_sample = pos.sample(fraction=0.1, seed=42)
+neg_sample = neg.sample(fraction=0.2, seed=42)
 
-print("Positive count:", positive_df.count())
-print("Negative count:", negative_df.count())
+# sample_df = pos_sample.union(neg_sample)
+sample_df = processed_df
+
+# repartition for better performance
+sample_df = sample_df.repartition(8)
+
+print("Positive count:", pos_sample.count())
+print("Negative count:", neg_sample.count())
 print("Total sample:", sample_df.count())
 
 
 # -----------------------------------------
-# 10. Convert Vector → String (TF-IDF path)
+# 10. TF-IDF OUTPUT
 # -----------------------------------------
 final_df = sample_df.select(
     col("features").cast("string"),
@@ -109,7 +116,7 @@ print("✅ TF-IDF data saved")
 
 
 # -----------------------------------------
-# 11. Save TEXT for LSTM (IMPORTANT FIX 🔥)
+# 11. LSTM TEXT OUTPUT
 # -----------------------------------------
 clean_df = sample_df.select(
     col("reviewText").alias("text"),
